@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.factor.dev.okhttpcyberalerts"
+    namespace = "com.factor.dev.retrofitcyberalerts"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.factor.dev.okhttpcyberalerts"
+        applicationId = "com.factor.dev.retrofitcyberalerts"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

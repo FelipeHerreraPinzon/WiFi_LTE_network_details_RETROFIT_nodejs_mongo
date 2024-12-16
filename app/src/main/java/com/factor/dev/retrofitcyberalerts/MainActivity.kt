@@ -1,4 +1,4 @@
-package com.factor.dev.okhttpcyberalerts
+package com.factor.dev.retrofitcyberalerts
 
 
 import android.os.Bundle
@@ -10,7 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -24,11 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-import com.factor.dev.okhttpcyberalerts.ui.theme.OkHttpCyberAlertsTheme
+import com.factor.dev.retrofitcyberalerts.ui.theme.OkHttpCyberAlertsTheme
 import kotlinx.coroutines.delay
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.telephony.SubscriptionManager

@@ -1,4 +1,4 @@
-package com.factor.dev.okhttpcyberalerts
+package com.factor.dev.retrofitcyberalerts
 
 
 data class NetworkInfo(

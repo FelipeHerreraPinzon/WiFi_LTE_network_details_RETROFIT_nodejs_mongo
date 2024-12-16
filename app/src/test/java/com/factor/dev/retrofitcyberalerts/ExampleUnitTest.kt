@@ -1,4 +1,4 @@
-package com.factor.dev.okhttpcyberalerts
+package com.factor.dev.retrofitcyberalerts
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.factor.dev.okhttpcyberalerts.ui.theme
+package com.factor.dev.retrofitcyberalerts.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

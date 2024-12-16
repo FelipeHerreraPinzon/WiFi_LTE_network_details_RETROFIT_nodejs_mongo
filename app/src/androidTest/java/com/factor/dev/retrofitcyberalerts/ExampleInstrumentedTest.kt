@@ -1,4 +1,4 @@
-package com.factor.dev.okhttpcyberalerts
+package com.factor.dev.retrofitcyberalerts
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

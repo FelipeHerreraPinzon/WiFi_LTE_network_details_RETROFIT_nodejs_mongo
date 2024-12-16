@@ -1,4 +1,4 @@
-package com.factor.dev.okhttpcyberalerts
+package com.factor.dev.retrofitcyberalerts
 
 import retrofit2.http.Body
 import retrofit2.http.POST
