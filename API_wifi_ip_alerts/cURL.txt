@@ -1,0 +1,22 @@
+curl -X POST http://localhost:5000/api/networkinfo \
+-H "Content-Type: application/json" \
+-d '{
+  "networks": {
+    "WiFi": {
+      "SSID": "MyHomeNetwork",
+      "BSSID": "00:14:22:01:23:45",
+      "ipAddress": "192.168.1.10",
+      "linkSpeedMbps": 72,
+      "frequencyMHz": 2412,
+      "signalStrengthRSSI": -50
+    },
+    "MobileData": {
+      "operatorName": "Movistar",
+      "networkType": "LTE",
+      "signalStrengthRSSI": -80,
+      "isRoaming": false,
+      "cellTowerId": "12345"
+    }
+  },
+  "timestamp": "2024-12-15T12:00:00Z"
+}'
