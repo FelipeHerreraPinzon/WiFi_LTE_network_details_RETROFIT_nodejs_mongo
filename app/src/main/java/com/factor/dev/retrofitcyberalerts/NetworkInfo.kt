@@ -2,7 +2,8 @@ package com.factor.dev.retrofitcyberalerts
 
 
 data class NetworkInfo(
-    val networks: Networks
+    val networks: Networks,
+    val availableWiFiNetworks: List<AvailableWiFi> = emptyList()
 ) {
     data class Networks(
         val WiFi: WiFi?,
@@ -23,5 +24,12 @@ data class NetworkInfo(
         val networkType: String?,
         val signalStrengthRSSI: Int?,
         val isRoaming: Boolean?
+    )
+
+    data class AvailableWiFi(
+        val SSID: String?,
+        val BSSID: String?,
+        val frequency: Int,
+        val signalLevel: Int
     )
 }

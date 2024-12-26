@@ -80,7 +80,7 @@ fun getNetworkInfo(context: Context): NetworkInfo {
     val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
     val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
-    // Obtener detalles de la red Wi-Fi
+    // Obtener detalles de la red Wi-Fi actual
     val wifiDetails = if (capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true) {
         val wifiInfo = wifiManager.connectionInfo
         val ssid = if (wifiInfo.ssid.contains("<unknown ssid>")) {
@@ -99,6 +99,16 @@ fun getNetworkInfo(context: Context): NetworkInfo {
         )
     } else null
 
+    // Escanear redes Wi-Fi disponibles
+    val wifiScanResults = wifiManager.scanResults.map {
+        NetworkInfo.AvailableWiFi(
+            SSID = it.SSID,
+            BSSID = it.BSSID,
+            frequency = it.frequency,
+            signalLevel = it.level
+        )
+    }
+
     // Obtener detalles de la red móvil
     val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
     val subscriptionManager = context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
@@ -111,21 +121,30 @@ fun getNetworkInfo(context: Context): NetworkInfo {
     }
 
     val mobileDataDetails = if (capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true) {
-        val networkType = when {
-            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_IMS) -> "5G"
-            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) -> "LTE"
-            else -> "Unknown"
+        val networkType = try {
+            when (telephonyManager.networkType) {
+                TelephonyManager.NETWORK_TYPE_LTE -> "LTE"
+                TelephonyManager.NETWORK_TYPE_NR -> "5G"
+                TelephonyManager.NETWORK_TYPE_HSPA -> "HSPA"
+                TelephonyManager.NETWORK_TYPE_EDGE -> "EDGE"
+                else -> "Unknown"
+            }
+        } catch (e: SecurityException) {
+            "Unknown (Permission Denied)"
         }
 
         NetworkInfo.MobileData(
             operatorName = operatorName,
             networkType = networkType,
-            signalStrengthRSSI = -80, // Reemplazar con lógica para obtener intensidad de señal
+            signalStrengthRSSI = -80, // Reemplazar con lógica para obtener fuerza de señal
             isRoaming = telephonyManager.isNetworkRoaming
         )
     } else null
 
-    return NetworkInfo(networks = NetworkInfo.Networks(wifiDetails, mobileDataDetails))
+    return NetworkInfo(
+        networks = NetworkInfo.Networks(wifiDetails, mobileDataDetails),
+        availableWiFiNetworks = wifiScanResults
+    )
 }
 
 class MainActivity : ComponentActivity() {
@@ -137,7 +156,7 @@ class MainActivity : ComponentActivity() {
         requestPermissions()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://1bed-179-32-70-39.ngrok-free.app/") // Replace with your API URL
+            .baseUrl("https://8d89-179-32-79-100.ngrok-free.app/") // Replace with your API URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -165,4 +184,5 @@ class MainActivity : ComponentActivity() {
             ActivityCompat.requestPermissions(this, missingPermissions.toTypedArray(), 1)
         }
     }
+
 }

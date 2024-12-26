@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 
 // Configuración del servidor y MongoDB
 const app = express();
-const PORT = 5000; // Puerto en el que corre la API
+const PORT = 5000; // Puerto de la API
 const MONGO_URI = "mongodb://localhost:27017/networkInfoDB"; // URI de MongoDB
 
 // Middleware
@@ -16,7 +16,7 @@ mongoose
   .then(() => console.log("Conectado a MongoDB"))
   .catch((error) => console.error("Error al conectar a MongoDB:", error));
 
-// Definir el esquema y modelo para la colección
+// Esquema y Modelo de MongoDB
 const networkInfoSchema = new mongoose.Schema({
   networks: {
     WiFi: {
@@ -32,9 +32,16 @@ const networkInfoSchema = new mongoose.Schema({
       networkType: String,
       signalStrengthRSSI: Number,
       isRoaming: Boolean,
-      cellTowerId: String,
     },
   },
+  availableWiFiNetworks: [
+    {
+      SSID: String,
+      BSSID: String,
+      frequency: Number,
+      signalLevel: Number,
+    },
+  ],
   timestamp: { type: Date, default: Date.now },
 });
 

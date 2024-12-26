@@ -1,9 +1,10 @@
 {
-  "name": "api_wifi_ip_alerts",
+  "name": "api_wifi_networks",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,6 @@
   "dependencies": {
     "body-parser": "^1.20.3",
     "express": "^4.21.2",
-    "mongoose": "^8.9.0"
+    "mongoose": "^8.9.1"
   }
 }
